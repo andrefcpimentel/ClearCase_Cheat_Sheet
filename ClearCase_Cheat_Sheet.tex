@@ -1,0 +1,115 @@
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
+
+\documentclass[10pt,twocolumn]{article}
+
+\usepackage[margin=0.25cm]{geometry}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+
+\pagestyle{empty}                 % Remove header and footer
+
+\begin{document}
+
+\definecolor{light-gray}{gray}{0.90}
+\rowcolors{1}{light-gray}{white}
+\renewcommand{\arraystretch}{1.2} % Space between rows
+
+\begin{center}
+  \huge{\textbf{ClearCase Cheat Sheet}} \\
+\end{center}
+
+\textit{ct is alias for cleartool} 
+
+\section*{View}
+\begin{tabularx}{10.2cm}{>{\hsize=5.3cm}X|>{\hsize=4cm}X}
+  \textbf{ct mkview -tag} \textit{view-tag} \textit{storage-location}          & Create a dynamic view \\
+  \textbf{ct rmview -tag} \textit{view-tag}           & Delete dynamic view \\
+  \textbf{ct mkview -snapshot -tag} \textit{view-tag} \textbf{-stgloc -auto} \textit{pathname}                   & Create snapshot view \\
+  \textbf{ct setview} \textit{user-name}                     & Set current view to \textit{user-name}\_view \\
+  \textbf{ct lsview}                                         & List all views \\
+  \textbf{ct lsview} \textit{view-tag}                       & List view path \\
+  \textbf{ct pwd}                                            & Show current view \\
+\end{tabularx}
+
+\section*{Check out}
+\begin{tabularx}{10.2cm}{l|X}
+  \textbf{ct co -c} "\textit{comment}" \textit{element} & Check out element with inline comment \\
+  \textbf{ct co -nc} \textit{element}                   & Check out element without comment \\
+  \textbf{ct co -unres} \textit{element}                & Check out element as UNRESERVED \\
+  \textbf{ct unco -rm} \textit{element}                 & Uncheckout and
+  remove element \\
+  \textbf{ct unco} \textit{element}                     & Uncheckout element
+  and save it as \textit{element}.keep \\
+\end{tabularx}
+
+\section*{List checked-out elements}
+\begin{tabularx}{10.2cm}{l|X}
+  \textbf{ct lsco}                  & List all checkouts in the current directory \\
+  \textbf{ct lsco} \textit{element} & List checkout information about the an \textit{element} \\
+  \textbf{ct lsco -recurse}         & Lists all checkouts of elements in the current directory and below \\
+  \textbf{ct lsco -cview}           & Lists checkouts of elements in the current directory that are checked-out to the current view \\
+  \textbf{ct lsco -cview -recurse}  & Lists checkouts of elements in the current directory and below that are checked-out the the current view \\ 
+  \textbf{ct lsco -me}              & Lists checkouts of elements in the current directory that the current user has checked-out \\
+  \textbf{ct lsco -user} \textit{user} & Lists checkouts of elements in the current directory that \textit{user} has checked-out \\  
+  \textbf{ct lsp -co}                     & List files checked out to current view \\
+\end{tabularx}
+
+\section*{Check in}
+\begin{tabularx}{10.2cm}{l|X}
+  \textbf{ct ci -c} "\textit{comment}" \textit{element} & Check in element with inline comment \\
+  \textbf{ct ci -nc}                                 & Check in element without comment \\
+\end{tabularx}
+
+\section*{Configspec}
+\begin{tabularx}{10.2cm}{l|X}
+  \textbf{ct edcs}            & Edit configspec \\
+  \textbf{ct catcs}           & Print rules of current view \\
+  \textbf{ct setcs -default}  & Reset to default view rules \\
+  \textbf{ct setcs -cur}      & Re-evaluate current configspec \\
+\end{tabularx}
+
+\section*{List elements}
+\begin{tabularx}{10.2cm}{l|X}
+  \textbf{ct lsvtree -g} \textit{element}    & Show the version history tree of element \\
+  \textbf{ct lsvtree -all} \textit{pref*} & List element version label and build label starting with \textit{pref}\\
+  \textbf{ct lsprivate}                   & List all private files in current view \\
+\end{tabularx}
+
+\section*{Element diff}
+\begin{tabularx}{10.2cm}{>{\hsize=4.6cm}X|>{\hsize=4.7cm}X}
+  \textbf{ct diff -g -pred} \textit{element}            & Graphically show the difference between current and predecessor version of \textit{element} \\ 
+  \textbf{ct diff -g} \textit{element element}@@/main/5 & Graphically show the difference between the version of \textit{element} and version 5 of the main branch of \textit{element} \\
+\end{tabularx}
+
+\section*{Labels}
+\begin{tabularx}{10.2cm}{l|X}
+  \textbf{ct mklbtype -nc} \textit{LABEL\_NAME} & Create a label to be used later \\
+ \textbf{ct mklabel} \textit{LABEL\_NAME file} & Apply a label to a file \\
+ \textbf{ct mklabel -r} \textit{LABEL\_NAME} & Label elements in directory tree \\ 
+\end{tabularx}
+
+\section*{Manage branches}
+\begin{tabularx}{10.2cm}{l|X}
+ \textbf{ct mkbranch -nc} \textit{branch-name} & Create a new branch type object  \\ 
+ \textbf{ct rmbranch} & Remove branch in version tree \\
+\end{tabularx}
+
+\section*{Remove elements}
+\begin{tabularx}{10.2cm}{l|X}
+ \textbf{ct rmelem} \textit{file} & Remove \textit{file} from ClearCase control \\ 
+ \textbf{ct rmelem} \textit{directory/*} & Remove \textit{directory}, revision history and its contents from ClearCase control \\
+ \textbf{rmver} \textit{file}@@/main/LATEST & Remove latest version checked in of \textit{file} from ClearCase \\
+ \textbf{ct rm} \textit{file} & Remove \textit{file} from ClearCase view \\
+\end{tabularx}
+
+\section*{Help and info commands}
+\begin{tabularx}{10.2cm}{l|X}
+ \textbf{ct man} \textit{clearcase-command} & Man page for ClearCase command \\ 
+ \textbf{ct help}                           & Lists possible command arguments \\
+\end{tabularx}
+
+\end{document}
