@@ -31,7 +31,6 @@
   \textbf{ct mkview -snapshot -tag} \textit{view-tag} \textbf{-stgloc -auto} \textit{pathname}                   & Create snapshot view \\
   \textbf{ct setview} \textit{user-name}                     & Set current view to \textit{user-name}\_view \\
   \textbf{ct lsview}                                         & List all views \\
-  \textbf{ct lsview} \textit{view-tag}                       & List view path \\
   \textbf{ct pwd}                                            & Show current view \\
 \end{tabularx}
 
@@ -44,6 +43,7 @@
   remove element \\
   \textbf{ct unco} \textit{element}                     & Uncheckout element
   and save it as \textit{element}.keep \\
+  \textbf{ct co -version} \textit{file}@@/main/59       & Check out a certain version \\
 \end{tabularx}
 
 \section*{List checked-out elements}
@@ -89,7 +89,8 @@
 \begin{tabularx}{10.2cm}{l|X}
   \textbf{ct mklbtype -nc} \textit{LABEL\_NAME} & Create a label to be used later \\
  \textbf{ct mklabel} \textit{LABEL\_NAME file} & Apply a label to a file \\
- \textbf{ct mklabel -r} \textit{LABEL\_NAME .} & Label elements in directory tree \\ 
+ \textbf{ct mklabel -r} \textit{LABEL\_NAME .} & Label elements in directory tree \\
+ \textbf{ct lstype -kind lbtype -short} & List all label types \\
 \end{tabularx}
 
 \section*{Manage branches}
